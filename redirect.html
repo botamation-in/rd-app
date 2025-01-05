@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    window.onload = function () {
+      // Parse the URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirectUrl = urlParams.get('redirect'); // Extract 'redirect' parameter
+
+      // Validate the URL to prevent misuse
+      if (redirectUrl && isValidUrl(redirectUrl)) {
+        window.location.href = redirectUrl; // Redirect to the URL
+      } else {
+        document.body.innerHTML = '<h1>Invalid or missing redirect URL</h1>';
+      }
+    };
+
+    // Function to validate the URL
+    function isValidUrl(string) {
+      try {
+        new URL(string); // Validates the URL format
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Redirecting...</h1>
+</body>
+</html>
