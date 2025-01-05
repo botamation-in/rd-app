@@ -8,7 +8,7 @@
     window.onload = function () {
       // Parse the URL parameters
       const urlParams = new URLSearchParams(window.location.search);
-      const redirectUrl = urlParams.get('redirect'); // Extract 'redirect' parameter
+      const redirectUrl = urlParams.get('url'); // Extract 'redirect' parameter
 
       // Validate the URL to prevent misuse
       if (redirectUrl && isValidUrl(redirectUrl)) {
