@@ -4,32 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirecting...</title>
+
   <script>
-    window.onload = function () {
-      // Parse the URL parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const redirectUrl = urlParams.get('url'); // Extract 'redirect' parameter
+    window.addEventListener('DOMContentLoaded', function () {
+      const queryString = window.location.search;
 
-      // Validate the URL to prevent misuse
-      if (redirectUrl && isValidUrl(redirectUrl)) {
-        window.location.href = redirectUrl; // Redirect to the URL
-      } else {
-        document.body.innerHTML = '<h1>Invalid or missing redirect URL</h1>';
+      // Read everything after "?url=" as the destination URL,
+      // including additional parameters such as &sessionId and &uname.
+      if (!queryString.startsWith('?url=')) {
+        showError();
+        return;
       }
-    };
 
-    // Function to validate the URL
-    function isValidUrl(string) {
+      const rawRedirectUrl = queryString.substring(5);
+
       try {
-        new URL(string); // Validates the URL format
-        return true;
-      } catch (_) {
-        return false;
+        // Supports both encoded and non-encoded URLs.
+        let redirectUrl;
+
+        try {
+          redirectUrl = decodeURIComponent(rawRedirectUrl);
+        } catch (_) {
+          redirectUrl = rawRedirectUrl;
+        }
+
+        const targetUrl = new URL(redirectUrl);
+
+        // Allow only normal web URLs.
+        if (
+          targetUrl.protocol !== 'https:' &&
+          targetUrl.protocol !== 'http:'
+        ) {
+          throw new Error('Unsupported URL protocol');
+        }
+
+        window.location.replace(targetUrl.href);
+      } catch (error) {
+        showError();
       }
+    });
+
+    function showError() {
+      document.body.innerHTML =
+        '<h1>Invalid or missing redirect URL</h1>';
     }
   </script>
 </head>
+
 <body>
-  <h3>Loading..</h3>
+  <h3>Loading...</h3>
 </body>
 </html>
