@@ -2,7 +2,7 @@
 >https://botamation-in.github.io/rd-app?url={{1}}
 
 ## WhatsApp Templete Dynamic URL
-  https://botamation-in.github.io/rd-app?url=
+  https://rd.botamation.ai?url=
 
   *Sample*
-  https://botamation-in.github.io/rd-app?url=https://www.google.com
+  https://rd.botamation.ai?url=https://www.google.com
