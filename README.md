@@ -6,7 +6,8 @@
 ```text
 https://rd.botamation.ai?url=
 ```
-Sample
+
+**Sample**
 ```text
 https://rd.botamation.ai?url=https://www.google.com
 ```  
